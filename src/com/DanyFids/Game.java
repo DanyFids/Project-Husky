@@ -225,6 +225,8 @@ public class Game extends Canvas implements Runnable{
         private int right = KeyEvent.VK_RIGHT;
         private int jump = KeyEvent.VK_C;
         private int atk = KeyEvent.VK_X;
+        private int wpn_next = KeyEvent.VK_Z;
+        private int wpn_prev = KeyEvent.VK_A;
 
 
         @Override
@@ -273,6 +275,13 @@ public class Game extends Canvas implements Runnable{
                 if(player.ySpeed < -3){
                     player.ySpeed = -3;
                 }
+            }
+
+            if(e.getKeyCode() == wpn_next){
+                player.nextWpn();
+            }
+            if(e.getKeyCode() == wpn_prev){
+                player.prevWpn();
             }
         }
     }

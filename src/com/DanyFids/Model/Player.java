@@ -57,6 +57,7 @@ public class Player extends Entity{
 
         sprt = new SpriteSheet("/test_player.png");
         arsenal.add(new TestMeleeWpn());
+        arsenal.add(new TestRangeWpn());
         equipped_wpn = 0;
 
         this.WIDTH = _WIDTH;
@@ -201,12 +202,29 @@ public class Player extends Entity{
         }
     }
 
+    public void nextWpn(){
+        this.equipped_wpn++;
+        if(this.equipped_wpn >= this.arsenal.size()){
+            this.equipped_wpn = 0;
+        }
+    }
+
+    public void prevWpn(){
+        this.equipped_wpn--;
+        if(this.equipped_wpn < 0){
+            this.equipped_wpn = this.arsenal.size() - 1;
+        }
+    }
+
 
     // In Game Player UI
+    public static final int SCRN_HEIGHT = 400;
+    public static final int SCRN_WIDTH = 600;
+
     private final int HEART_W = 15;
     private final int HEART_H = 14;
 
-    private SpriteSheet UI_sheet = new SpriteSheet("/hp_hearts.png");
+    private SpriteSheet UI_sheet = new SpriteSheet("/UI.png");
 
     public void drawUI(BufferedImage screen){
         Graphics g = screen.getGraphics();
@@ -230,5 +248,9 @@ public class Player extends Entity{
         for(int e = 0; e < lost_hearts; e++){
             g.drawImage(UI_sheet.getPage().getSubimage(64,0, HEART_W, HEART_H), ((HEART_W + 1) * (full_hearts + half_hearts + e)),0, null);
         }
+
+
+        g.drawImage(UI_sheet.getPage().getSubimage(0, 30, 64,64), SCRN_WIDTH - 70, 4, null);
+        g.drawImage(arsenal.get(equipped_wpn).img.getPage(), SCRN_WIDTH - 55, 19, null);
     }
 }

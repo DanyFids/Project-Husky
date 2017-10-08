@@ -1,5 +1,7 @@
 package com.DanyFids.Model.Weapons;
 
+import com.DanyFids.graphics.SpriteSheet;
+
 /**
  * Created by Daniel on 10/7/2017.
  */
@@ -11,5 +13,7 @@ public class TestMeleeWpn extends Weapon {
 
     public TestMeleeWpn() {
         super(NAME, TYPE, DMG, RANGED);
+
+        img = new SpriteSheet("/test_sword.png");
     }
 }
