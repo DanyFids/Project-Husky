@@ -26,13 +26,12 @@ public class Platform extends Terrain{
                 if(e.ySpeed > 0){
                     e.ySpeed -= 0.1;
                     e.land();
+                    e.onPlatform = true;
                 }else{
                     e.ySpeed += 0.1;
                 }
             }
-        }
-
-        if(e.getX() + e.WIDTH + e.xSpeed > this.getX() && e.getX() + e.xSpeed < this.getX() + this.getWidth() &&
+        }else if(e.getX() + e.WIDTH + e.xSpeed > this.getX() && e.getX() + e.xSpeed < this.getX() + this.getWidth() &&
                 e.getY() + e.HEIGHT + e.ySpeed > this.getY() && e.getY() + e.getHeight() <= this.getY()){
             while(e.getX() + e.WIDTH + e.xSpeed > this.getX() && e.getX() + e.xSpeed < this.getX() + this.getWidth() &&
                     e.getY() + e.HEIGHT + e.ySpeed > this.getY() && e.getY() + e.ySpeed < this.getY() + this.getHeight()){

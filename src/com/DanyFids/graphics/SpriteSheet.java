@@ -1,6 +1,7 @@
 package com.DanyFids.graphics;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -45,5 +46,9 @@ public class SpriteSheet {
 
     public BufferedImage getPage(){
         return this.page;
+    }
+
+    public BufferedImage getSprite(int x, int y, int w, int h){
+        return this.page.getSubimage(x,y,w,h);
     }
 }

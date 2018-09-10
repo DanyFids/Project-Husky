@@ -1,5 +1,6 @@
 package com.DanyFids.Model.Enemies;
 
+import com.DanyFids.Model.Direction;
 import com.DanyFids.Model.Enemy;
 import com.DanyFids.Model.Physics;
 import com.DanyFids.Model.Player;
@@ -63,13 +64,13 @@ public class Dummy extends Enemy {
     }
 
     @Override
-    public void hurt(int dmg, boolean to_right) {
+    public void hurt(int dmg, Direction d) {
         if(invuln_timer == 0) {
             hp -= dmg;
             ySpeed = -Physics.KNOCK_BACK;
-            if (to_right) {
+            if (d == Direction.right) {
                 xSpeed = Physics.KNOCK_BACK;
-            } else {
+            } else if(d == Direction.left){
                 xSpeed = -Physics.KNOCK_BACK;
             }
             this.can_move = false;
@@ -92,11 +93,15 @@ public class Dummy extends Enemy {
     }
 
     @Override
-    public boolean hitShield(boolean to_right) {
+    public boolean hitShield(Direction d) {
         return false;
     }
 
     public void hitDetect(Player p){
 
+    }
+
+    public Enemy copy(){
+        return new Dummy(this.getX(), this.getY());
     }
 }

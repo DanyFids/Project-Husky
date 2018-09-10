@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * Created by Daniel on 9/30/2017.
  */
 public abstract class Enemy extends Entity {
-    public final int INVULN_TIME = 10;
+    public final int INVULN_TIME = 20;
 
     public int hp;
 
@@ -21,13 +21,17 @@ public abstract class Enemy extends Entity {
 
     public abstract void update();
 
-    public abstract void hurt(int dmg, boolean to_right);
+    public abstract void hurt(int dmg, Direction d);
+
+    public void primeInvuln(){
+        this.invuln_timer = INVULN_TIME;
+    }
 
     public void kill(LinkedList<Enemy> enemies, int id){
         enemies.remove(id);
     }
 
-    public abstract boolean hitShield(boolean to_right);
+    public abstract boolean hitShield(Direction d);
 
     public abstract void hitDetect(Player p);
 
@@ -50,4 +54,6 @@ public abstract class Enemy extends Entity {
     public void setHp(int hp){
         this.hp = hp;
     }
+
+    public abstract Enemy copy();
 }

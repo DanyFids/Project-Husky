@@ -1,5 +1,6 @@
 package com.DanyFids.Model.Enemies;
 
+import com.DanyFids.Model.Direction;
 import com.DanyFids.Model.Enemy;
 import com.DanyFids.Model.Physics;
 import com.DanyFids.Model.Player;
@@ -23,9 +24,9 @@ public class ShieldDummy extends Enemy {
     private int origin_x;
 
     private boolean can_move = true;
-    private boolean facing_right;
+    //private Direction dir = Direction.left;
 
-    public ShieldDummy(int x, int y, boolean fr){
+    public ShieldDummy(int x, int y, Direction d){
         this.setX(x);
         this.setY(y);
 
@@ -37,17 +38,23 @@ public class ShieldDummy extends Enemy {
         this.WIDTH = _WIDTH;
         sprt = new SpriteSheet("/test_shield_dummy.png");
 
-        facing_right = fr;
+        dir = d;
     }
 
     @Override
-    public void draw(BufferedImage screen) {
+    public void draw(BufferedImage screen, int offsetX, int offsetY) {
         Graphics g = screen.getGraphics();
 
-        if(!facing_right) {
-            g.drawImage(sprt.getPage(), this.getX(), this.getY(), null);
-        }else{
-            g.drawImage(sprt.getPage(), this.getX() + this.getWidth(), this.getY(), -this.getWidth(), this.getHeight(), null);
+        switch(dir){
+            case left:
+                g.drawImage(sprt.getPage(), this.getX() - offsetX, this.getY() - offsetY, null);
+                break;
+            case right:
+                g.drawImage(sprt.getPage(), this.getX() + this.getWidth() - offsetX, this.getY() - offsetY, -this.getWidth(), this.getHeight(), null);
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -57,10 +64,10 @@ public class ShieldDummy extends Enemy {
             if (this.getX() != this.origin_x) {
                 if (this.getX() > this.origin_x) {
                     this.xSpeed = -MOV_SPD;
-                    this.facing_right = false;
+                    this.dir = Direction.left;
                 } else {
                     this.xSpeed = MOV_SPD;
-                    this.facing_right = true;
+                    this.dir = Direction.right;
                 }
             } else {
                 this.xSpeed = 0;
@@ -82,14 +89,14 @@ public class ShieldDummy extends Enemy {
     }
 
     @Override
-    public void hurt(int dmg, boolean to_right) {
-        if(facing_right == to_right) {
+    public void hurt(int dmg, Direction d) {
+        if(!Direction.opposing(dir, d)) {
             if (invuln_timer == 0) {
                 hp -= dmg;
                 ySpeed = -Physics.KNOCK_BACK;
-                if (to_right) {
+                if (d == Direction.right) {
                     xSpeed = Physics.KNOCK_BACK;
-                } else {
+                } else if(d == Direction.left){
                     xSpeed = -Physics.KNOCK_BACK;
                 }
                 this.can_move = false;
@@ -97,7 +104,7 @@ public class ShieldDummy extends Enemy {
                 invuln_timer = INVULN_TIME;
             }
         }else{
-            if(to_right){
+            if(d == Direction.right){
                 xSpeed = Physics.KNOCK_BACK;
             }else{
                 xSpeed = -Physics.KNOCK_BACK;
@@ -106,8 +113,8 @@ public class ShieldDummy extends Enemy {
     }
 
     @Override
-    public boolean hitShield(boolean to_right){
-        return facing_right != to_right;
+    public boolean hitShield(Direction d){
+        return Direction.opposing(dir, d);
     }
 
 
@@ -120,13 +127,17 @@ public class ShieldDummy extends Enemy {
     public void kill(LinkedList<Enemy> enemies, int id){
         enemies.remove(id);
 
-        enemies.add(new ShieldDummy(this.origin_x, 0, false));
+        enemies.add(new ShieldDummy(this.origin_x, 0, Direction.left));
     }
 
     @Override
     public void hitDetect(Player p){
         if(p.getX() <= this.getX() + this.getWidth() && p.getX() + p.getWidth() >= this.getX() && p.getY() <= this.getY() + this.getHeight() && p.getY() + p.getHeight() >= this.getY()){
-            p.hurt(TOUCH_DAMAGE);
+            p.hurt(TOUCH_DAMAGE, Direction.nil);
         }
+    }
+
+    public Enemy copy(){
+        return new ShieldDummy(this.getX(), this.getY(), this.dir);
     }
 }

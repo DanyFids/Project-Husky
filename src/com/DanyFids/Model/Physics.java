@@ -7,4 +7,5 @@ public class Physics {
     public static final double GRAVITY = 0.2;
     public static final int TERMINAL_V = 7;
     public static final int KNOCK_BACK = 2;
+    public static final int SLIDE_SPEED = 1;
 }

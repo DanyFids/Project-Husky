@@ -15,6 +15,23 @@ public abstract class Entity {
     public float xSpeed = 0;
     public float ySpeed = 0;
 
+    public int yMove = 0;
+
+    public boolean onRamp = false;
+    public boolean stuckSliding = false;
+    public boolean onWall = false;
+    public boolean face_right = true;
+    public boolean onPlatform = false;
+    public boolean onLadder = false;
+
+    public boolean isPlayer = false;
+
+    public State state = State.idle;
+
+    private SpawnPoint respawn;
+
+    public Direction dir = Direction.right;
+
     public int HEIGHT;
     public int WIDTH;
 
@@ -22,10 +39,14 @@ public abstract class Entity {
 
     public abstract void land();
 
-    public void draw(BufferedImage screen){
+    public void wallSlide(){}
+
+    public void endSlide(){}
+
+    public void draw(BufferedImage screen, int offsetX, int offsetY){
         Graphics g = screen.getGraphics();
 
-        g.drawImage(sprt.getPage(), this.x, this.y, null);
+        g.drawImage(sprt.getPage(), this.x - offsetX, this.y - offsetY, null);
     }
 
     public int getX(){
@@ -51,4 +72,12 @@ public abstract class Entity {
     public int getHeight() {
         return HEIGHT;
     }
+
+    public int getDashTime(){ return 0;}
+
+    public void setDashTime(int time){}
+
+    public void ladderClimbDown(){}
+
+    public void ladderClimbUp(int ladderY){}
 }

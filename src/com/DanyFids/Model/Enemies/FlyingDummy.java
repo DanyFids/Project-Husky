@@ -1,5 +1,6 @@
 package com.DanyFids.Model.Enemies;
 
+import com.DanyFids.Model.Direction;
 import com.DanyFids.Model.Enemy;
 import com.DanyFids.Model.Physics;
 import com.DanyFids.Model.Player;
@@ -45,11 +46,11 @@ public class FlyingDummy extends Enemy{
         if(x > dest){
             to_right = false;
             start_left = false;
-            this.xSpeed = -MOV_SPEED;
+            //this.xSpeed = -MOV_SPEED;
         }else{
             to_right = true;
             start_left = true;
-            this.xSpeed = MOV_SPEED;
+            //this.xSpeed = MOV_SPEED;
         }
 
         this.setHp(START_HP);
@@ -78,13 +79,15 @@ public class FlyingDummy extends Enemy{
             if (to_right) {
                 if ((start_left && this.getX() >= this.dest_x) || (!start_left && this.getX() <= this.start_x)) {
                     //System.out.println("HOI!");
-                    this.xSpeed = -this.MOV_SPEED;
                     this.to_right = false;
+                }else{
+                    this.xSpeed = this.MOV_SPEED;
                 }
             } else {
                 if ((start_left && this.getX() <= this.start_x) || (!start_left && this.getX() >= this.dest_x)) {
-                    this.xSpeed = this.MOV_SPEED;
                     this.to_right = true;
+                }else{
+                    this.xSpeed = -this.MOV_SPEED;
                 }
             }
         }
@@ -97,7 +100,7 @@ public class FlyingDummy extends Enemy{
         }
 
         if(stunned){
-            ySpeed -= Physics.GRAVITY;
+            ySpeed += Physics.GRAVITY;
         }else{
             ySpeed = 0;
         }
@@ -106,11 +109,12 @@ public class FlyingDummy extends Enemy{
 
         if(invuln_timer <= 0){
             stunned = false;
+            /*
             if(to_right){
                 xSpeed = MOV_SPEED;
             }else{
                 xSpeed = - MOV_SPEED;
-            }
+            }*/
         }else{
             invuln_timer--;
         }
@@ -119,13 +123,13 @@ public class FlyingDummy extends Enemy{
     }
 
     @Override
-    public void hurt(int dmg, boolean to_right) {
+    public void hurt(int dmg, Direction d) {
         if (invuln_timer <= 0) {
             hp -= dmg;
             ySpeed = -Physics.KNOCK_BACK;
-            if (to_right) {
+            if (d == Direction.right) {
                 xSpeed = Physics.KNOCK_BACK;
-            } else {
+            } else if(d == Direction.left){
                 xSpeed = -Physics.KNOCK_BACK;
             }
 
@@ -144,7 +148,7 @@ public class FlyingDummy extends Enemy{
     }
 
     @Override
-    public boolean hitShield(boolean to_right) {
+    public boolean hitShield(Direction d) {
         return false;
     }
 
@@ -154,18 +158,22 @@ public class FlyingDummy extends Enemy{
     }
 
     @Override
-    public void draw(BufferedImage screen){
+    public void draw(BufferedImage screen, int offsetX, int offsetY){
         Graphics g = screen.getGraphics();
 
         int frame = (anim_timer / (ANIM_TIME/2));
         //System.out.println(frame);
 
-        g.drawImage(this.sprt.getPage().getSubimage((this.getWidth() + 1) * frame,0, this.getWidth(), this.getHeight()), this.getX(), this.getY(),null );
+        g.drawImage(this.sprt.getPage().getSubimage((this.getWidth() + 1) * frame,0, this.getWidth(), this.getHeight()), this.getX() - offsetX, this.getY() - offsetY,null );
 
     }
 
     @Override
     public void hitDetect(Player p){
 
+    }
+
+    public Enemy copy(){
+        return new FlyingDummy(start_x, start_y, dest_x);
     }
 }
