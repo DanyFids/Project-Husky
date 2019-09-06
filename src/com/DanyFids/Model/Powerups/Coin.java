@@ -13,8 +13,8 @@ import java.util.Random;
  */
 public class Coin extends Wealth{
     private static final int VALUE = 1;
-    private static final int WIDTH = 18;
-    private static final int HEIGHT = 20;
+    private static final int WIDTH = 9;
+    private static final int HEIGHT = 10;
     private final int ANIM_FRAMES = 12;
     private final int ANIM_TIME = 48;
 
@@ -34,7 +34,7 @@ public class Coin extends Wealth{
 
         int frame = animcounter/frametime;
         //System.out.println(frame);
-        g.drawImage(sprt.getPage().getSubimage(WIDTH*frame,0,WIDTH,HEIGHT), this.getX() - offsetX, this.getY() - offsetY, null);
+        g.drawImage(sprt.getPage().getSubimage(18*frame,0,18,20), this.getX() - offsetX, this.getY() - offsetY, WIDTH, HEIGHT,null);
 
         animcounter++;
 

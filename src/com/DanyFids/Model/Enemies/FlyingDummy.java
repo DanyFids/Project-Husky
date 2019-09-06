@@ -1,9 +1,6 @@
 package com.DanyFids.Model.Enemies;
 
-import com.DanyFids.Model.Direction;
-import com.DanyFids.Model.Enemy;
-import com.DanyFids.Model.Physics;
-import com.DanyFids.Model.Player;
+import com.DanyFids.Model.*;
 import com.DanyFids.graphics.SpriteSheet;
 
 import java.awt.*;
@@ -141,7 +138,7 @@ public class FlyingDummy extends Enemy{
     }
 
     @Override
-    public void kill(LinkedList<Enemy> enemies, int id) {
+    public void kill(LinkedList<Enemy> enemies, LinkedList<Powerup> powerups, int id) {
         enemies.remove(id);
 
         enemies.add(new FlyingDummy(start_x, start_y, dest_x));

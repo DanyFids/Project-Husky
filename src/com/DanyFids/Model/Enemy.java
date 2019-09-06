@@ -11,6 +11,8 @@ public abstract class Enemy extends Entity {
     public int hp;
 
     public int invuln_timer = 0;
+
+    public Powerup[] drops = {};
     //private int width;
     //private int height;
 
@@ -27,7 +29,10 @@ public abstract class Enemy extends Entity {
         this.invuln_timer = INVULN_TIME;
     }
 
-    public void kill(LinkedList<Enemy> enemies, int id){
+    public void kill(LinkedList<Enemy> enemies, LinkedList<Powerup> powerups, int id){
+        for(int c = 0; c < drops.length; c++){
+            powerups.add(drops[c].copy());
+        }
         enemies.remove(id);
     }
 

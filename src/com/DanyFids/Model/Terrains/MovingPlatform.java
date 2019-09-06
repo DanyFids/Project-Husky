@@ -117,21 +117,27 @@ public class MovingPlatform extends NPC {
         hitResult(p);
     }
 
+    @Override
+    public void interact(Player p, LinkedList<Powerup> powerups, LinkedList<Enemy> enemies) {
+
+    }
+
     private void hitResult(Entity e){
         boolean landed = false;
-        if(e.getY() + e.getHeight() + e.ySpeed > this.getY() && e.getY() + e.getHeight() <= this.getY()
+
+        int eFoot = e.getY() + e.getHeight();
+
+        /*while((eFoot < this.getY() && eFoot + e.ySpeed >= this.getY() + this.ySpeed) &&(e.getX() < this.getX() + this.getWidth() && e.getX() + e.getWidth() > this.getX())){
+            e.ySpeed = eFoot
+        }*/
+
+
+        if((eFoot + e.ySpeed > this.getY() + this.ySpeed || eFoot + e.ySpeed > this.getY()) && e.getY() + e.getHeight() <= this.getY()
                 && (e.getX() + e.WIDTH > this.getX() && e.getX() < this.getX() + this.getWidth())){
-            while(((e.getY() + e.ySpeed > this.getY() && e.getY() + e.ySpeed < (this.getY() + this.getHeight()))
-                    || ((e.getY() + e.HEIGHT) + e.ySpeed > this.getY() && (e.getY() + e.HEIGHT) + e.ySpeed < (this.getY() + this.getHeight())))){
-                if(e.ySpeed > 0){
-                    e.ySpeed -= 0.1;
-                    e.land();
-                    landed = true;
-                    e.onPlatform = true;
-                }else{
-                    e.ySpeed += 0.1;
-                }
-            }
+            e.ySpeed = this.getY() - eFoot;
+            e.land();
+            landed = true;
+            e.onPlatform = true;
         }
 
         if(e.getX() + e.WIDTH + e.xSpeed > this.getX() && e.getX() + e.xSpeed < this.getX() + this.getWidth() &&

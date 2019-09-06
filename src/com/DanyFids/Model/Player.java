@@ -1,8 +1,10 @@
 package com.DanyFids.Model;
 
+import com.DanyFids.Model.NPCs.DefaultNPC;
 import com.DanyFids.Model.Weapons.TestMeleeWpn;
 import com.DanyFids.Model.Weapons.*;
 import com.DanyFids.graphics.SpriteSheet;
+
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,6 +28,8 @@ public class Player extends Entity{
     private final int SLIDE_TIME = 20;
     private final int START_LIVES = 3;
 
+    private final DefaultNPC DEFAULT_NPC = new DefaultNPC();
+
     //public float ySpeed = 0;
     //public float xSpeed = 0;
 
@@ -45,6 +49,7 @@ public class Player extends Entity{
     private Direction slide_dir;
     private Direction dash_dir;
 
+    private boolean NPC_interact = false;
     private boolean can_jump = false;
     private boolean can_attack = true;
     private boolean attacking = false;
@@ -61,6 +66,9 @@ public class Player extends Entity{
     private int equipped_wpn;
 
     private SpawnPoint respawn = new SpawnPoint(0,0);
+
+    public NPC InteractNPC = DEFAULT_NPC;
+    private PlayerStats stats;
 
     //timers
     private int anim_timer = 0;
@@ -271,6 +279,11 @@ public class Player extends Entity{
             if(look_down){
                 this.dir = Direction.down;
             }
+        }
+
+        if(NPC_interact){
+            NPC_interact = false;
+            InteractNPC = DEFAULT_NPC;
         }
 
         switch(state){
@@ -627,6 +640,12 @@ public class Player extends Entity{
     public boolean isDead(){
         return this.hp <= 0;
     }
+
+    public boolean isNextToNPC(){
+        return NPC_interact;
+    }
+
+    public void setNextToNPC(boolean b){NPC_interact = b;}
 
     public void setState(State s){
         this.state = s;

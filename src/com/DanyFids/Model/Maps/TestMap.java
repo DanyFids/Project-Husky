@@ -1,16 +1,13 @@
 package com.DanyFids.Model.Maps;
 
-import com.DanyFids.Model.Direction;
+import com.DanyFids.Model.*;
 import com.DanyFids.Model.Enemies.FlyingDummy;
 import com.DanyFids.Model.Enemies.ShieldDummy;
-import com.DanyFids.Model.Enemy;
-import com.DanyFids.Model.NPC;
-import com.DanyFids.Model.Powerups.Coin;
-import com.DanyFids.Model.Terrain;
+import com.DanyFids.Model.NPCs.Chest;
+import com.DanyFids.Model.Powerups.DropTable;
 import com.DanyFids.Model.Terrains.*;
 
 import java.awt.*;
-import java.util.LinkedList;
 
 /**
  * Created by Daniel on 10/16/2017.
@@ -18,6 +15,9 @@ import java.util.LinkedList;
 public class TestMap extends Map {
     private static final int _WIDTH = 2300;
     private static final int _HEIGHT = 800;
+
+    private static final Powerup[][] chests = {
+    };
 
     private static final Terrain[] _TERRAIN = {
             new Ramp(831, SCRN_HEIGHT-150, 0,50, 100, 0, "/test_ramp4.png"),
@@ -76,16 +76,17 @@ public class TestMap extends Map {
     };
 
     private static final Terrain[] _FOREGROUND = {
-            new HiddenPath(900, 500, "/test_hiddenPath.png")
+            new HiddenPath(898, 500, "/test_hiddenPath.png")
     };
 
     private static final NullZone[] _NULLZONE = {
-            new NullZone(0,400, 900, 400)
+            new NullZone(0,400, 850, 400)
     };
 
     private static final NPC[] _NPC = {
             new MovingPlatform(1600, 600, "/test_platform.png", new Point[]{new Point(1600, 300)}),
-            new MovingPlatform(1600, 400, "/test_platform.png", new Point[]{new Point(1900, 400)})
+            new MovingPlatform(1600, 400, "/test_platform.png", new Point[]{new Point(1900, 400)}),
+            new Chest(932,670, new DropTable(30))
     };
 
     public TestMap() {
@@ -97,6 +98,7 @@ public class TestMap extends Map {
         enemies.add(new FlyingDummy(1825, _HEIGHT-135, 1825));
         enemies.add(new BreakableTerrain(1100, 600, 40, 100, 3, "/test_breakableWall.png"));
 
+        /*powerups.add(new Coin(100, 0));
         powerups.add(new Coin(100, 0));
         powerups.add(new Coin(100, 0));
         powerups.add(new Coin(100, 0));
@@ -106,8 +108,7 @@ public class TestMap extends Map {
         powerups.add(new Coin(100, 0));
         powerups.add(new Coin(100, 0));
         powerups.add(new Coin(100, 0));
-        powerups.add(new Coin(100, 0));
-        powerups.add(new Coin(100, 0));
+        powerups.add(new Coin(100, 0));*/
 
         this.P_START_X = 2200;
         this.P_START_Y = 0;

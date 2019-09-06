@@ -66,12 +66,11 @@ public abstract class Powerup extends Entity {
 
     private void Spawn(){
         Random gen = new Random();
-        int jump = gen.nextInt(10);
+        int jump = gen.nextInt(7);
 
         this.ySpeed = -jump;
 
-        float move = gen.nextFloat();
-        move %= 1.5;
+        float move = gen.nextInt(3) - 1;
 
         boolean right = gen.nextBoolean();
 

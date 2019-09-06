@@ -3,6 +3,7 @@ package com.DanyFids;
 import com.DanyFids.Model.*;
 import com.DanyFids.Model.Maps.Map;
 import com.DanyFids.Model.Maps.TestMap;
+import com.DanyFids.Model.Menus.DialogBox;
 import com.DanyFids.Model.Terrains.*;
 import com.DanyFids.Model.Enemies.FlyingDummy;
 import com.DanyFids.Model.Enemies.ShieldDummy;
@@ -22,6 +23,27 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class Game extends Canvas implements Runnable{
+    enum GameState{
+        play,
+        paused,
+        dialog,
+        cutscene,
+        menu;
+
+        public boolean isPaused(){
+            switch(this){
+                case play:
+                case dialog:
+                case cutscene:
+                    return false;
+                case paused:
+                case menu:
+                    return true;
+            }
+            return false;
+        }
+    }
+
 
     private static final long serialVersionUID = 1L;
 
@@ -43,6 +65,7 @@ public class Game extends Canvas implements Runnable{
     private int[] pixels = ((DataBufferInt) screen.getRaster().getDataBuffer()).getData();
 
     private boolean running;
+    private boolean paused = false;
 
     // Game
     private Player player = new Player();
@@ -55,6 +78,7 @@ public class Game extends Canvas implements Runnable{
     private NPC[] NPCs;
     private LinkedList<Enemy> enemies = new LinkedList<>();
     private LinkedList<Powerup> powerups = new LinkedList<>();
+    private Menu MenuDisplay;
 
 
     public Game(){
@@ -161,7 +185,7 @@ public class Game extends Canvas implements Runnable{
 
         for(int e=0; e < enemies.size(); e++){
             if(enemies.get(e).getHp() <= 0){
-                enemies.get(e).kill(enemies, e);
+                enemies.get(e).kill(enemies, powerups, e);
             }else {
                 enemies.get(e).move();
             }
@@ -417,8 +441,13 @@ public class Game extends Canvas implements Runnable{
 
             if(e.getKeyCode() == atk){
                 if(!atk_pressed){
-                    player.attack();
-                    atk_pressed = true;
+                    if(player.isNextToNPC()){
+                        player.InteractNPC.interact(player, powerups, enemies);
+                        atk_pressed = true;
+                    }else {
+                        player.attack();
+                        atk_pressed = true;
+                    }
                 }
             }
 
