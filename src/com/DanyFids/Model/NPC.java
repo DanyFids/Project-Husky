@@ -5,6 +5,7 @@ import com.DanyFids.graphics.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 12/30/2017.
@@ -33,7 +34,7 @@ public abstract class NPC extends Entity {
 
     public abstract void hitDetect(Player p);
 
-    public abstract void interact(Player p, LinkedList<Powerup> powerups, LinkedList<Enemy> enemies);
+    public abstract void interact(Player p, Vector<Powerup> powerups, Vector<Enemy> enemies);
 
     public abstract void hitDetect(Entity e);
 

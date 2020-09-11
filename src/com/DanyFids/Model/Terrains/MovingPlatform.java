@@ -5,6 +5,7 @@ import com.DanyFids.graphics.SpriteSheet;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 12/26/2017.
@@ -118,7 +119,7 @@ public class MovingPlatform extends NPC {
     }
 
     @Override
-    public void interact(Player p, LinkedList<Powerup> powerups, LinkedList<Enemy> enemies) {
+    public void interact(Player p, Vector<Powerup> powerups, Vector<Enemy> enemies) {
 
     }
 

@@ -4,6 +4,7 @@ import com.DanyFids.Model.*;
 import com.DanyFids.graphics.SpriteSheet;
 
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class Sign extends NPC {
     private int dialogueId;
@@ -46,7 +47,7 @@ public class Sign extends NPC {
     }
 
     @Override
-    public void interact(Player p, LinkedList<Powerup> powerups, LinkedList<Enemy> enemies) {
+    public void interact(Player p, Vector<Powerup> powerups, Vector<Enemy> enemies) {
 
     }
 

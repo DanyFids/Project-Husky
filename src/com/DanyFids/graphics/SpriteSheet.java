@@ -4,10 +4,12 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 5/24/2017.
  */
+
 public class SpriteSheet {
     private String path;
 
@@ -15,6 +17,8 @@ public class SpriteSheet {
     private int height;
 
     private int[] pixels;
+    
+    Vector<Vector<Sprite>> animations;
 
     private BufferedImage page;
 

@@ -16,6 +16,9 @@ public abstract class Entity {
     public float ySpeed = 0;
 
     public int yMove = 0;
+    
+    int animation = 0;
+    int frame = 0;
 
     public boolean onRamp = false;
     public boolean stuckSliding = false;

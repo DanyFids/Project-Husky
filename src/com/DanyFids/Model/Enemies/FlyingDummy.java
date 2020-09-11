@@ -6,6 +6,7 @@ import com.DanyFids.graphics.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 10/2/2017.
@@ -138,7 +139,7 @@ public class FlyingDummy extends Enemy{
     }
 
     @Override
-    public void kill(LinkedList<Enemy> enemies, LinkedList<Powerup> powerups, int id) {
+    public void kill(Vector<Enemy> enemies, Vector<Powerup> powerups, int id){
         enemies.remove(id);
 
         enemies.add(new FlyingDummy(start_x, start_y, dest_x));

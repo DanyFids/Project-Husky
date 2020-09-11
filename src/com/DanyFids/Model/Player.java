@@ -9,6 +9,7 @@ import com.DanyFids.graphics.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 5/24/2017.
@@ -60,9 +61,9 @@ public class Player extends Entity{
     private int max_hp = START_HP;
     private int lives;
     private int gold;
-
-    private LinkedList<Weapon> arsenal = new LinkedList<>();
-    private LinkedList<Projectile> projectiles = new LinkedList<>();
+    
+    private Vector<Weapon> arsenal = new Vector<>();
+    private Vector<Projectile> projectiles = new Vector<>();
     private int equipped_wpn;
 
     private SpawnPoint respawn = new SpawnPoint(0,0);
@@ -512,7 +513,7 @@ public class Player extends Entity{
         }
     }
 
-    public LinkedList<Projectile> getProjectiles(){
+    public Vector<Projectile> getProjectiles(){
         return this.projectiles;
     }
 

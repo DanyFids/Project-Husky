@@ -7,6 +7,7 @@ import com.DanyFids.graphics.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class Chest extends NPC {
     private static int CHEST_WIDTH = 60;
@@ -67,7 +68,7 @@ public class Chest extends NPC {
     }
 
     @Override
-    public void interact(Player p, LinkedList<Powerup> powerups, LinkedList<Enemy> enemies) {
+    public void interact(Player p, Vector<Powerup> powerups, Vector<Enemy> enemies) {
         if(!opened) {
             for (int l = 0; l < loot.length; l++) {
                 powerups.add(loot[l]);

@@ -21,6 +21,7 @@ import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class Game extends Canvas implements Runnable{
     enum GameState{
@@ -76,8 +77,8 @@ public class Game extends Canvas implements Runnable{
     private Terrain[] terrain;
     private Terrain[] foreground;
     private NPC[] NPCs;
-    private LinkedList<Enemy> enemies = new LinkedList<>();
-    private LinkedList<Powerup> powerups = new LinkedList<>();
+    private Vector<Enemy> enemies = new Vector<>();
+    private Vector<Powerup> powerups = new Vector<>();
     private Menu MenuDisplay;
 
 
@@ -290,7 +291,7 @@ public class Game extends Canvas implements Runnable{
 
             terrain[i].hitDetect(player);
 
-            LinkedList<Projectile> playerProjectiles = player.getProjectiles();
+            Vector<Projectile> playerProjectiles = player.getProjectiles();
 
             for(int p = 0; p < playerProjectiles.size(); p++){
                 terrain[i].hitDetect(playerProjectiles.get(p));
@@ -325,7 +326,7 @@ public class Game extends Canvas implements Runnable{
     private void killPlayer(){
         player.die();
         while (enemies.size() > 0){
-            enemies.removeLast();
+            enemies.remove(enemies.lastElement());
         }
         this.enemies = map.getEnemies();
         this.NPCs = map.getNPCs();

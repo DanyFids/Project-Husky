@@ -3,6 +3,7 @@ package com.DanyFids.Model.NPCs;
 import com.DanyFids.Model.*;
 
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class DefaultNPC extends NPC {
     @Override
@@ -31,7 +32,7 @@ public class DefaultNPC extends NPC {
     }
 
     @Override
-    public void interact(Player p, LinkedList<Powerup> powerups, LinkedList<Enemy> enemies) {
+    public void interact(Player p, Vector<Powerup> powerups, Vector<Enemy> enemies) {
 
     }
 

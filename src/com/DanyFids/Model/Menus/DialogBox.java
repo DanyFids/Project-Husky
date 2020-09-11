@@ -1,6 +1,6 @@
 package com.DanyFids.Model.Menus;
 
-import com.DanyFids.Model.Entity;
+//import com.DanyFids.Model.Entity;
 import com.DanyFids.Model.NPCs.Dialog;
 
 import java.awt.*;
@@ -35,4 +35,10 @@ public class DialogBox extends Menu {
 
         g.drawString(dialog.text, 3, 3);
     }
+
+	@Override
+	public void Open() {
+		// TODO Auto-generated method stub
+		
+	}
 }

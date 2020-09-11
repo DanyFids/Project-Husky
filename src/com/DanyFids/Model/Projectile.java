@@ -3,6 +3,7 @@ package com.DanyFids.Model;
 import com.DanyFids.Model.Weapons.WpnType;
 
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 10/9/2017.
@@ -100,7 +101,7 @@ public abstract class Projectile extends Entity {
         }
     }
 
-    public void hitDetect(Enemy e, LinkedList<Projectile> ps, int p){
+    public void hitDetect(Enemy e, Vector<Projectile> ps, int p){
         switch(dir) {
             case left:
             case right:

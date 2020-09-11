@@ -6,6 +6,7 @@ import com.DanyFids.graphics.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 10/1/2017.
@@ -121,7 +122,7 @@ public class ShieldDummy extends Enemy {
     }
 
     @Override
-    public void kill(LinkedList<Enemy> enemies, LinkedList<Powerup> powerups, int id){
+    public void kill(Vector<Enemy> enemies, Vector<Powerup> powerups, int id){
         enemies.remove(id);
 
         enemies.add(new ShieldDummy(this.origin_x, 0, Direction.left));

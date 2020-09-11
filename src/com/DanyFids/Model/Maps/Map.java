@@ -7,6 +7,7 @@ import com.DanyFids.Model.Powerup;
 import com.DanyFids.Model.Terrain;
 
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 10/16/2017.
@@ -25,8 +26,8 @@ public abstract class Map {
     private Terrain[] foreground;
     private NullZone[] nullzones;
     private NPC[] NPCs;
-    public LinkedList<Enemy> enemies = new LinkedList<>();
-    public LinkedList<Powerup> powerups = new LinkedList<>();
+    public Vector<Enemy> enemies = new Vector<>();
+    public Vector<Powerup> powerups = new Vector<>();
 
     public int P_START_X = 0;
     public int P_START_Y = 0;
@@ -98,8 +99,8 @@ public abstract class Map {
 
     public Terrain[] getForeground(){return this.foreground;}
 
-    public LinkedList<Enemy> getEnemies(){
-        LinkedList<Enemy> e = new LinkedList<>();
+    public Vector<Enemy> getEnemies(){
+    	Vector<Enemy> e = new Vector<>();
 
         for(int i = 0; i < enemies.size(); i++){
             e.add(enemies.get(i).copy());
@@ -108,8 +109,8 @@ public abstract class Map {
         return e;
     }
 
-    public LinkedList<Powerup> getPowerups(){
-        LinkedList<Powerup> p = new LinkedList<>();
+    public Vector<Powerup> getPowerups(){
+        Vector<Powerup> p = new Vector<>();
 
         for(int i =0; i < powerups.size(); i++){
             p.add(powerups.get(i).copy());

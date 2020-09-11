@@ -1,6 +1,7 @@
 package com.DanyFids.Model;
 
 import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Created by Daniel on 9/30/2017.
@@ -29,7 +30,7 @@ public abstract class Enemy extends Entity {
         this.invuln_timer = INVULN_TIME;
     }
 
-    public void kill(LinkedList<Enemy> enemies, LinkedList<Powerup> powerups, int id){
+    public void kill(Vector<Enemy> enemies, Vector<Powerup> powerups, int id){
         for(int c = 0; c < drops.length; c++){
             powerups.add(drops[c].copy());
         }
